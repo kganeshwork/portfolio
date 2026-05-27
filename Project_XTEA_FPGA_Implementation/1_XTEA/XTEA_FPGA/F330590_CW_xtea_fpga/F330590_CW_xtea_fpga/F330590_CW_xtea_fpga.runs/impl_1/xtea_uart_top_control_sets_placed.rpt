@@ -1,0 +1,120 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1.1_AR73110 (win64) Build 2580384 Sat Jun 29 08:12:21 MDT 2019
+| Date         : Sun May 10 17:19:26 2026
+| Host         : WIN-STEM107-19 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file xtea_uart_top_control_sets_placed.rpt
+| Design       : xtea_uart_top
+| Device       : xc7a35t
+----------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    42 |
+|    Minimum number of control sets                        |    42 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    94 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    42 |
+| >= 0 to < 4        |     8 |
+| >= 4 to < 6        |     5 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     4 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    25 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               2 |            1 |
+| No           | No                    | Yes                    |              56 |           22 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              17 |            3 |
+| Yes          | No                    | Yes                    |             967 |          295 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+-----------------------------------------+------------------+------------------+----------------+
+|  Clock Signal  |              Enable Signal              | Set/Reset Signal | Slice Load Count | Bel Load Count |
++----------------+-----------------------------------------+------------------+------------------+----------------+
+|  clk_IBUF_BUFG | u_uart/test_cnt_reg[2][4]               | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG | u_uart/FSM_sequential_state_reg[2]      | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG | u_uart/test_cnt_reg[2][0]               | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG | u_uart/test_cnt_reg[2][1]               | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG | u_uart/test_cnt_reg[2][3]               | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG | u_uart/test_cnt_reg[2][5]               | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG | u_uart/test_cnt_reg[2][2]               | reset_IBUF       |                1 |              1 |
+|  clk_IBUF_BUFG |                                         |                  |                1 |              2 |
+|  clk_IBUF_BUFG | u_uart/os_count0                        | reset_IBUF       |                1 |              4 |
+|  clk_IBUF_BUFG | u_uart/rx_count0                        | reset_IBUF       |                1 |              4 |
+|  clk_IBUF_BUFG | u_uart/tx_count[3]_i_1_n_0              | reset_IBUF       |                1 |              4 |
+|  clk_IBUF_BUFG | u_uart/FSM_sequential_state_reg[0]_2[0] | reset_IBUF       |                1 |              5 |
+|  clk_IBUF_BUFG | u_xtea/round_cnt[4]_i_1_n_0             | reset_IBUF       |                1 |              5 |
+|  clk_IBUF_BUFG | u_uart/tx_buffer[8]_i_1_n_0             |                  |                1 |              8 |
+|  clk_IBUF_BUFG | u_tx_ena                                | reset_IBUF       |                6 |              8 |
+|  clk_IBUF_BUFG | u_uart/rx_buffer0                       |                  |                2 |              9 |
+|  clk_IBUF_BUFG | u_uart/rx_error0                        | reset_IBUF       |                2 |              9 |
+|  clk_IBUF_BUFG | u_uart/shift_reg                        | reset_IBUF       |                9 |             24 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[3]_0[0]             | reset_IBUF       |                7 |             32 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[3]_2[0]             | reset_IBUF       |                9 |             32 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[0]_0[0]             | reset_IBUF       |                7 |             32 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[0][0]               | reset_IBUF       |                8 |             32 |
+|  clk_IBUF_BUFG | u_uart/E[0]                             | reset_IBUF       |                9 |             32 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[3]_1[0]             | reset_IBUF       |                6 |             32 |
+|  clk_IBUF_BUFG | u_xtea/current_z0[31]_i_1_n_0           | reset_IBUF       |               14 |             32 |
+|  clk_IBUF_BUFG | u_xtea/data_word_out[31]_i_1_n_0        | reset_IBUF       |               10 |             32 |
+|  clk_IBUF_BUFG | u_xtea/current_key[2]_6                 | reset_IBUF       |               11 |             32 |
+|  clk_IBUF_BUFG | u_xtea/current_key[1]_7                 | reset_IBUF       |               14 |             32 |
+|  clk_IBUF_BUFG | u_xtea/current_key[3]_5                 | reset_IBUF       |               11 |             32 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[3][0]               | reset_IBUF       |                7 |             32 |
+|  clk_IBUF_BUFG | u_xtea/current_y0[31]_i_1_n_0           | reset_IBUF       |               11 |             32 |
+|  clk_IBUF_BUFG | u_xtea/current_y1[31]_i_1_n_0           | reset_IBUF       |               12 |             32 |
+|  clk_IBUF_BUFG | u_uart/byte_cnt_reg[2][0]               | reset_IBUF       |                5 |             32 |
+|  clk_IBUF_BUFG | u_xtea/E[0]                             | reset_IBUF       |               10 |             32 |
+|  clk_IBUF_BUFG | out_buf[2]                              | reset_IBUF       |                8 |             32 |
+|  clk_IBUF_BUFG | out_buf[1]                              | reset_IBUF       |                8 |             32 |
+|  clk_IBUF_BUFG | out_buf[3]                              | reset_IBUF       |                9 |             32 |
+|  clk_IBUF_BUFG | u_xtea/enc_mode_i_1_n_0                 | reset_IBUF       |               20 |             33 |
+|  clk_IBUF_BUFG |                                         | reset_IBUF       |               22 |             56 |
+|  clk_IBUF_BUFG | u_xtea/current_sum[31]_i_1_n_0          | reset_IBUF       |               17 |             64 |
+|  clk_IBUF_BUFG | x_dv                                    | reset_IBUF       |               22 |             64 |
+|  clk_IBUF_BUFG | u_xtea/pipe_y0                          | reset_IBUF       |               31 |            128 |
++----------------+-----------------------------------------+------------------+------------------+----------------+
+
+

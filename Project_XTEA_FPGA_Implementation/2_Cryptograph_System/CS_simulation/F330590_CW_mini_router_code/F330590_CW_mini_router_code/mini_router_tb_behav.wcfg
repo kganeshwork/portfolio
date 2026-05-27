@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mini_router_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="mini_router_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="134400001fs"></ZoomEndTime>
+      <Cursor1Time time="12400000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
+      <ValueColumnWidth column_width="196"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/mini_router_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/req1" type="logic">
+      <obj_property name="ElementShortName">req1</obj_property>
+      <obj_property name="ObjectShortName">req1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/data1" type="array">
+      <obj_property name="ElementShortName">data1[9:0]</obj_property>
+      <obj_property name="ObjectShortName">data1[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/req2" type="logic">
+      <obj_property name="ElementShortName">req2</obj_property>
+      <obj_property name="ObjectShortName">req2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/data2" type="array">
+      <obj_property name="ElementShortName">data2[9:0]</obj_property>
+      <obj_property name="ObjectShortName">data2[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/grant1" type="logic">
+      <obj_property name="ElementShortName">grant1</obj_property>
+      <obj_property name="ObjectShortName">grant1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/grant2" type="logic">
+      <obj_property name="ElementShortName">grant2</obj_property>
+      <obj_property name="ObjectShortName">grant2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/data_out" type="array">
+      <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/mini_router_tb/CLK_PERIOD" type="other">
+      <obj_property name="ElementShortName">CLK_PERIOD</obj_property>
+      <obj_property name="ObjectShortName">CLK_PERIOD</obj_property>
+   </wvobject>
+</wave_config>

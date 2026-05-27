@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="xtea_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="xtea_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="120000000fs"></ZoomStartTime>
+      <ZoomEndTime time="254400001fs"></ZoomEndTime>
+      <Cursor1Time time="150000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="163"></NameColumnWidth>
+      <ValueColumnWidth column_width="196"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject fp_name="/xtea_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/reset_n" type="logic">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/encryption_flag" type="logic">
+      <obj_property name="ElementShortName">encryption_flag</obj_property>
+      <obj_property name="ObjectShortName">encryption_flag</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/key_data_in_flag" type="logic">
+      <obj_property name="ElementShortName">key_data_in_flag</obj_property>
+      <obj_property name="ObjectShortName">key_data_in_flag</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/input_data" type="array">
+      <obj_property name="ElementShortName">input_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">input_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/input_key" type="array">
+      <obj_property name="ElementShortName">input_key[31:0]</obj_property>
+      <obj_property name="ObjectShortName">input_key[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/output_data" type="array">
+      <obj_property name="ElementShortName">output_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/output_data_flag" type="logic">
+      <obj_property name="ElementShortName">output_data_flag</obj_property>
+      <obj_property name="ObjectShortName">output_data_flag</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/xtea_keys" type="array">
+      <obj_property name="ElementShortName">xtea_keys[0:2][127:0]</obj_property>
+      <obj_property name="ObjectShortName">xtea_keys[0:2][127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/input_data_array" type="array">
+      <obj_property name="ElementShortName">input_data_array[0:2][127:0]</obj_property>
+      <obj_property name="ObjectShortName">input_data_array[0:2][127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/encrypted_data" type="array">
+      <obj_property name="ElementShortName">encrypted_data[127:0]</obj_property>
+      <obj_property name="ObjectShortName">encrypted_data[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/decrypted_data" type="array">
+      <obj_property name="ElementShortName">decrypted_data[127:0]</obj_property>
+      <obj_property name="ObjectShortName">decrypted_data[127:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/clk_period" type="other">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xtea_tb/num_keys" type="other">
+      <obj_property name="ElementShortName">num_keys</obj_property>
+      <obj_property name="ObjectShortName">num_keys</obj_property>
+   </wvobject>
+</wave_config>

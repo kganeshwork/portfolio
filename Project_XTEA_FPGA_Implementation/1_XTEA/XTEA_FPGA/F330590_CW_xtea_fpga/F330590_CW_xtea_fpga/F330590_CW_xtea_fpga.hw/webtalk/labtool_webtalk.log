@@ -1,0 +1,9 @@
+WARNING: [Common 17-306] Update version (2019.1.1_AR73110) does not match product version (2019.1.1).
+
+****** Webtalk v2019.1.1_AR73110 (64-bit)
+  **** SW Build 2580384 on Sat Jun 29 08:12:21 MDT 2019
+  **** IP Build 2579722 on Sat Jun 29 11:35:40 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/wskg3/F330590_CW_xtea_fpga/F330590_CW_xtea_fpga.hw/webtalk/labtool_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Sat May  9 15:02:55 2026...

@@ -1,0 +1,15 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1.1_AR73110 (win64) Build 2580384 Sat Jun 29 08:12:21 MDT 2019
+| Date         : Sun May 10 17:19:44 2026
+| Host         : WIN-STEM107-19 running 64-bit major release  (build 9200)
+| Command      : report_bus_skew -warn_on_violation -file xtea_uart_top_bus_skew_routed.rpt -pb xtea_uart_top_bus_skew_routed.pb -rpx xtea_uart_top_bus_skew_routed.rpx
+| Design       : xtea_uart_top
+| Device       : 7a35t-cpg236
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bus Skew Report
+
+No bus skew constraints
+

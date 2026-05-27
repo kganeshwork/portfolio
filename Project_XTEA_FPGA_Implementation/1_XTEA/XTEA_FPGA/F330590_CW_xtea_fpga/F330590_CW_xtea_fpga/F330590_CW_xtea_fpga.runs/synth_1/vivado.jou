@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1.1_AR73110 (64-bit)
+# SW Build 2580384 on Sat Jun 29 08:12:21 MDT 2019
+# IP Build 2579722 on Sat Jun 29 11:35:40 MDT 2019
+# Start of session at: Sun May 10 17:18:26 2026
+# Process ID: 5304
+# Current directory: C:/Users/wskg3/F330590_CW_1005/F330590_CW_xtea_fpga/F330590_CW_xtea_fpga.runs/synth_1
+# Command line: vivado.exe -log xtea_uart_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source xtea_uart_top.tcl
+# Log file: C:/Users/wskg3/F330590_CW_1005/F330590_CW_xtea_fpga/F330590_CW_xtea_fpga.runs/synth_1/xtea_uart_top.vds
+# Journal file: C:/Users/wskg3/F330590_CW_1005/F330590_CW_xtea_fpga/F330590_CW_xtea_fpga.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source xtea_uart_top.tcl -notrace
