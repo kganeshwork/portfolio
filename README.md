@@ -1,4 +1,4 @@
-# portfolio
+# Portfolio
 
 This github is an organised location that can be used to display the projects that I have worked on. 
 
