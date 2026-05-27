@@ -1,0 +1,25 @@
+21:50:18 **** Incremental Build of configuration Debug for project NUCLEO-F767ZI ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -DHAVE_NETWORK_INFO -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/ST/AI/Inc -I../Middlewares/ST/AI/Misc/Inc -I../Middlewares/ST/AI/Validation/Inc -I../Middlewares/ST/AI/Misc/Src -I../Middlewares/ST/AI/Validation/Src -I../AI/App -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:210:16: warning: unused variable 'led_state' [-Wunused-variable]
+  210 |        uint8_t led_state = Switch_Led(output_val);
+      |                ^~~~~~~~~
+arm-none-eabi-gcc -o "NUCLEO-F767ZI.elf" @"objects.list"  -l:NetworkRuntime1200_CM7_GCC.a -mcpu=cortex-m7 -T"../STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NUCLEO-F767ZI.map" -Wl,--gc-sections -static -L../Middlewares/ST/AI/Lib/NetworkRuntime1200_CM7_GCC.a --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: NUCLEO-F767ZI.elf
+ 
+arm-none-eabi-size  NUCLEO-F767ZI.elf 
+arm-none-eabi-objdump -h -S NUCLEO-F767ZI.elf  > "NUCLEO-F767ZI.list"
+   text	   data	    bss	    dec	    hex	filename
+  56128	   1064	  11264	  68456	  10b68	NUCLEO-F767ZI.elf
+Finished building: default.size.stdout
+ 
+Finished building: NUCLEO-F767ZI.list
+ 
+21:50:22 **** Incremental Build of configuration Debug for project NUCLEO-F767ZI ****
+make -j12 all 
+arm-none-eabi-size  NUCLEO-F767ZI.elf 
+   text	   data	    bss	    dec	    hex	filename
+  56128	   1064	  11264	  68456	  10b68	NUCLEO-F767ZI.elf
+Finished building: default.size.stdout
+ 

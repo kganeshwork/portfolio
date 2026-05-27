@@ -1,0 +1,10 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+activeLaunchTarget=null\:---
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:F330590_CW_part3_case2_cubeaideployment Debug
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:F330590_CW_part3_case2_cubeaideployment\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:F330590_CW_part3_case2_cubeaideployment\ Debug/activeLaunchTarget=null\:---
+org.eclipse.launchbar.core.descriptorType.default\:F330590_CW_part3_case2_cubeaideployment\ Debug/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:F330590_CW_part3_case2_cubeaideployment\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

@@ -1,0 +1,14 @@
+20:49:38 **** Incremental Build of configuration Debug for project F330590_CW_part3_case2_cubeaideployment ****
+make -j12 all 
+arm-none-eabi-size  F330590_CW_part3_case2_cubeaideployment.elf 
+   text	   data	    bss	    dec	    hex	filename
+  46188	   3128	   5208	  54524	   d4fc	F330590_CW_part3_case2_cubeaideployment.elf
+Finished building: default.size.stdout
+ 
+20:49:42 **** Incremental Build of configuration Debug for project F330590_CW_part3_case2_cubeaideployment ****
+make -j12 all 
+arm-none-eabi-size  F330590_CW_part3_case2_cubeaideployment.elf 
+   text	   data	    bss	    dec	    hex	filename
+  46188	   3128	   5208	  54524	   d4fc	F330590_CW_part3_case2_cubeaideployment.elf
+Finished building: default.size.stdout
+ 

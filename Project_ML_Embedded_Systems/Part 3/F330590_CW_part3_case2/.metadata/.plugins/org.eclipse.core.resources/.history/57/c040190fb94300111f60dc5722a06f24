@@ -1,0 +1,314 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file    app_x-cube-ai.c
+  * @brief   Sine wave prediction using TFLite model deployed via X-CUBE-AI
+  *          Adapted for WSC334 Lab 5 - NUCLEO-F767ZI
+  *
+  * Model architecture (from sine_model.tflite):
+  *   Input  : 1x float32 (angle in radians, range 0 to 2*pi)
+  *   Layers : dense_1 -> relu -> dense_2 -> relu -> dense_3 -> relu -> dense_4
+  *   Output : 1x float32 (predicted sine value, range -1 to 1)
+  *
+  * Serial output at 115200 baud via USART3 (ST-Link Virtual COM port)
+  * Shows: input angle, predicted sine, actual sine, and % error
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Includes ------------------------------------------------------------------*/
+#include "app_x-cube-ai.h"
+#include "main.h"
+#include "ai_datatypes_defines.h"
+#include "network.h"
+#include "network_data.h"
+
+/* USER CODE BEGIN includes */
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+/* USER CODE END includes */
+
+/* USER CODE BEGIN PD */
+/*
+ * Number of test angles to run inference on.
+ * We sample NUM_TEST_POINTS evenly from 0 to 2*pi.
+ */
+#define NUM_TEST_POINTS     16
+
+/*
+ * M_PI may not be defined in all toolchains - define it here if missing.
+ */
+#ifndef M_PI
+#define M_PI  3.14159265358979323846f
+#endif
+/* USER CODE END PD */
+
+/* USER CODE BEGIN PV */
+/*
+ * ai_handle  : opaque pointer to the instantiated AI network object
+ * data_ins   : array of pointers to input buffers  (one per network input)
+ * data_outs  : array of pointers to output buffers (one per network output)
+ * UseCase    : index of the current test point (0 .. NUM_TEST_POINTS-1)
+ */
+static ai_handle    network = AI_HANDLE_NULL;
+static ai_buffer   *data_ins[AI_NETWORK_IN_NUM]  = { NULL };
+static ai_buffer   *data_outs[AI_NETWORK_OUT_NUM] = { NULL };
+static int          UseCase = 0;
+
+/*
+ * Pre-computed test angles (radians) evenly spaced 0 .. 2*pi.
+ * These are filled in MX_X_CUBE_AI_Init() at run-time.
+ */
+static float test_angles[NUM_TEST_POINTS];
+/* USER CODE END PV */
+
+/* ============================================================
+ *  Forward declarations of helper functions defined below
+ * ============================================================ */
+static void ai_log_err(const ai_error err, const char *msg);
+static int  ai_run(void);
+
+/* USER CODE BEGIN 1 */
+
+/* ------------------------------------------------------------------
+ * Helper : print an X-CUBE-AI error code to the serial terminal
+ * ------------------------------------------------------------------ */
+static void ai_log_err(const ai_error err, const char *msg)
+{
+    if (msg)
+        printf("\r\nAI ERROR (%s)\r\n", msg);
+
+    printf("  type    = %d\r\n", (int)err.type);
+    printf("  code    = %d\r\n", (int)err.code);
+}
+
+/* ------------------------------------------------------------------
+ * Helper : run one forward pass through the network
+ * ------------------------------------------------------------------ */
+static int ai_run(void)
+{
+    ai_i32 n_batch;
+
+    n_batch = ai_network_run(network, data_ins[0], data_outs[0]);
+
+    if (n_batch != 1)
+    {
+        ai_error err = ai_network_get_error(network);
+        ai_log_err(err, "ai_run: ai_network_run failed");
+        return -1;
+    }
+    return 0;
+}
+
+/* USER CODE END 1 */
+
+/* ============================================================
+ *  MX_X_CUBE_AI_Init
+ *  Called once from main() before the main loop.
+ *  Creates and initialises the AI network, then pre-computes
+ *  the test angle table.
+ * ============================================================ */
+void MX_X_CUBE_AI_Init(void)
+{
+    /* USER CODE BEGIN 5 */
+
+    printf("\r\n### Sine Model - X-CUBE-AI Init ###\r\n");
+
+    ai_error err;
+
+    /* 1 ── Create the network instance ------------------------------------ */
+    err = ai_network_create_and_init(&network, NULL, NULL);
+    if (err.type != AI_ERROR_NONE)
+    {
+        ai_log_err(err, "ai_network_create_and_init failed");
+        Error_Handler();
+    }
+
+    /* 2 ── Retrieve input / output buffer descriptors --------------------- */
+    data_ins[0]  = ai_network_inputs_get(network,  NULL);
+    data_outs[0] = ai_network_outputs_get(network, NULL);
+
+    if ((data_ins[0] == NULL) || (data_outs[0] == NULL))
+    {
+        printf("ERROR: Failed to get I/O buffer descriptors\r\n");
+        Error_Handler();
+    }
+
+    /* 3 ── Print network info to serial terminal -------------------------- */
+    ai_network_report report;
+    if (ai_network_get_report(network, &report) != true)
+    {
+        printf("WARNING: Could not retrieve network report\r\n");
+    }
+    else
+    {
+        printf("  Model name    : %s\r\n", report.model_name);
+        printf("  Model date    : %s\r\n", report.model_datetime);
+        printf("  Inputs        : %d\r\n", (int)report.n_inputs);
+        printf("  Outputs       : %d\r\n", (int)report.n_outputs);
+        printf("  Macc          : %lu\r\n", (unsigned long)report.n_macc);
+    }
+
+    /* 4 ── Pre-compute evenly spaced test angles 0 .. 2*pi --------------- */
+    for (int i = 0; i < NUM_TEST_POINTS; i++)
+    {
+        test_angles[i] = (float)i * (2.0f * (float)M_PI) / (float)NUM_TEST_POINTS;
+    }
+
+    printf("  Test points   : %d (0 to 2*pi)\r\n", NUM_TEST_POINTS);
+    printf("### Init complete ###\r\n\r\n");
+
+    /* USER CODE END 5 */
+}
+
+/* ============================================================
+ *  acquire_and_process_data
+ *  Feeds the current test angle into the network input buffer.
+ *  Prints the input value to the serial terminal.
+ * ============================================================ */
+static int acquire_and_process_data(ai_i8 *data[])
+{
+    /* Retrieve the angle for the current test point */
+    float angle = test_angles[UseCase % NUM_TEST_POINTS];
+
+    /*
+     * Write the float value directly into the network input buffer.
+     * The model is float32 so no quantisation is needed.
+     * data[0] points to the AI_BUFFER that wraps the input tensor.
+     */
+    ((ai_float *)data[0]->data)[0] = (ai_float)angle;
+
+    printf("Test %2d/%d | Angle = %7.4f rad (%6.2f deg) | ",
+           UseCase + 1,
+           NUM_TEST_POINTS,
+           angle,
+           angle * 180.0f / (float)M_PI);
+
+    return 0;
+}
+
+/* ============================================================
+ *  post_process
+ *  Reads the network output buffer, computes the actual sine
+ *  value, and prints both to the serial terminal.
+ *  Also drives the onboard LEDs as a visual indicator:
+ *    Green LED (LD1 / PB0)  : predicted value > 0
+ *    Red   LED (LD3 / PB14) : predicted value < 0
+ *    Both off               : predicted value ≈ 0
+ * ============================================================ */
+static int post_process(ai_i8 *data[])
+{
+    /* Read the predicted sine value from the output buffer */
+    ai_float predicted = ((ai_float *)data[0]->data)[0];
+
+    /* Compute the ground-truth sine for comparison */
+    float angle  = test_angles[UseCase % NUM_TEST_POINTS];
+    float actual = sinf(angle);
+    float error  = actual - predicted;
+
+    /* Print result line (completes the line started in acquire_and_process_data) */
+    printf("Predicted = %7.4f | Actual = %7.4f | Error = %+.4f\r\n",
+           predicted, actual, error);
+
+    /* ── LED indicators ───────────────────────────────────────────────────
+     *   Green LED : LD1 on PB0  (GPIO_PIN_0,  GPIOB)
+     *   Red   LED : LD3 on PB14 (GPIO_PIN_14, GPIOB)
+     *   Blue  LED : LD2 on PB7  (GPIO_PIN_7,  GPIOB) - used for activity
+     * ------------------------------------------------------------------ */
+    if (predicted > 0.1f)
+    {
+        /* Positive sine → Green LED ON, Red LED OFF */
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0,  GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+    }
+    else if (predicted < -0.1f)
+    {
+        /* Negative sine → Red LED ON, Green LED OFF */
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0,  GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+    }
+    else
+    {
+        /* Near zero → both LEDs OFF */
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0,  GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+    }
+
+    return 0;
+}
+
+/* ============================================================
+ *  MX_X_CUBE_AI_Process
+ *  Called repeatedly from the main loop.
+ *  Runs inference for every test angle once, prints a summary,
+ *  then enters an infinite idle loop.
+ * ============================================================ */
+void MX_X_CUBE_AI_Process(void)
+{
+    /* USER CODE BEGIN 6 */
+
+    int res = -1;
+
+    /* ── Banner ─────────────────────────────────────────────────────────── */
+    printf("##############################################################\r\n");
+    printf("###          Sine Wave Prediction - NUCLEO-F767ZI          ###\r\n");
+    printf("###  Model : sine_model.tflite (float32, 4x Dense + ReLU) ###\r\n");
+    printf("###  Input : angle (radians)   Output : sin(angle)         ###\r\n");
+    printf("##############################################################\r\n\r\n");
+
+    if (network)
+    {
+        /* ── Run inference for each test angle ──────────────────────────── */
+        do
+        {
+            /* Step 1 : load angle into input buffer */
+            res = acquire_and_process_data(data_ins);
+
+            /* Step 2 : run the neural network */
+            if (res == 0)
+                res = ai_run();
+
+            /* Step 3 : read output, print result, update LEDs */
+            if (res == 0)
+                res = post_process(data_outs);
+
+            /* Pause 1 second between test points so output is readable */
+            HAL_Delay(1000);
+
+            UseCase++;
+
+        } while ((res == 0) && (UseCase < NUM_TEST_POINTS));
+
+        /* ── Summary line ───────────────────────────────────────────────── */
+        printf("\r\n##############################################################\r\n");
+        if (res == 0)
+            printf("###  All %d test points complete. Experiment finished.     ###\r\n",
+                   NUM_TEST_POINTS);
+        else
+            printf("###  Run terminated early (error at test point %d).        ###\r\n",
+                   UseCase);
+        printf("##############################################################\r\n\r\n");
+    }
+
+    if (res)
+    {
+        ai_error err = {AI_ERROR_INVALID_STATE, AI_ERROR_CODE_NETWORK};
+        ai_log_err(err, "MX_X_CUBE_AI_Process failed");
+    }
+
+    /* Turn off all LEDs at end */
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0,  GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+
+    /* ── Idle loop : reset board to re-run ──────────────────────────────── */
+    printf("Reset the board to run again.\r\n\r\n");
+    while (1)
+    {
+        /* Blink blue LED (LD2/PB7) slowly to show idle state */
+        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+        HAL_Delay(1000);
+    }
+
+    /* USER CODE END 6 */
+}

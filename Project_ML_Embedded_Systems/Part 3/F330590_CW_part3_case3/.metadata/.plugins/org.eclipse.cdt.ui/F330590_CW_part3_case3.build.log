@@ -1,0 +1,12 @@
+19:04:32 **** Incremental Build of configuration Debug for project F330590_CW_part3_case3 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F767xx -DHAVE_NETWORK_INFO -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/ST/AI/Inc -I../Middlewares/ST/AI/Misc/Inc -I../Middlewares/ST/AI/Validation/Inc -I../Middlewares/ST/AI/Misc/Src -I../Middlewares/ST/AI/Validation/Src -I../AI/App -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:28:10: fatal error: stm32h7xx_ll_cortex.h: No such file or directory
+   28 | #include "stm32h7xx_ll_cortex.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+19:04:33 Build Failed. 2 errors, 0 warnings. (took 705ms)
+

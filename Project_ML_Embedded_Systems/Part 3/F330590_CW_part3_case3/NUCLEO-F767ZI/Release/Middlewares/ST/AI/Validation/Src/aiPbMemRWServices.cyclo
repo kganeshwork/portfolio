@@ -1,0 +1,5 @@
+../Middlewares/ST/AI/Validation/Src/aiPbMemRWServices.c:24:5:bsdChecksum	2
+../Middlewares/ST/AI/Validation/Src/aiPbMemRWServices.c:39:6:memory_valid_addr_range	1
+../Middlewares/ST/AI/Validation/Src/aiPbMemRWServices.c:47:6:memory_checksum	3
+../Middlewares/ST/AI/Validation/Src/aiPbMemRWServices.c:55:6:memory_write	1
+../Middlewares/ST/AI/Validation/Src/aiPbMemRWServices.c:62:6:aiPbCmdRWMemory	6

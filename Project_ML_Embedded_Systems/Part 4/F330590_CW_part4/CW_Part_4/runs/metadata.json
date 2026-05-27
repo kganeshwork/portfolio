@@ -1,0 +1,15 @@
+{
+  "all_dataset_classes": [
+    "circlepolis",
+    "ovalopolis",
+    "rectanglepolis",
+    "trianglepolis"
+  ],
+  "trained_classes": [
+    "circlepolis",
+    "ovalopolis",
+    "rectanglepolis",
+    "trianglepolis"
+  ],
+  "cw_edi_note": "This model was intentionally trained on only a subset of the available classes. That limitation supports discussion around representation, fairness, exclusion, and the importance of inclusive engineering design."
+}

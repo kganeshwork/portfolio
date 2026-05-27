@@ -1,0 +1,10 @@
+18:34:13 **** Incremental Build of configuration Debug for project task3_3STEDGE ****
+make -j12 all 
+arm-none-eabi-size  task3_3STEDGE.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44420	   1064	  11192	  56676	   dd64	task3_3STEDGE.elf
+Finished building: default.size.stdout
+ 
+
+18:34:14 Build Finished. 0 errors, 0 warnings. (took 553ms)
+

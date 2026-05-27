@@ -1,0 +1,15 @@
+{
+  "toolchain": "STM32CubeIDE",
+  "variant": "Validation",
+  "fromMx": false,
+  "name": "NUCLEO-F767ZI",
+  "createdAt": 1771966211776,
+  "lastModified": 1771966575848,
+  "lastAccessed": 1771966211781,
+  "board": "NUCLEO-F767ZI",
+  "uartInstance": {
+    "usart": "USART3",
+    "txpin": "PD8",
+    "rxpin": "PD9"
+  }
+}
